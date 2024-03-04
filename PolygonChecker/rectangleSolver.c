@@ -1,3 +1,6 @@
-//test 
 #include <stdio.h>
-//andy
+#include <stdbool.h>
+
+bool isRectangle(int points) {
+	return true;
+}
