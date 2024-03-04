@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 
-
+extern "C" int* getTriangleSides(int* triangleSides);
+extern "C" char* analyzeTriangle(int side1, int side2, int side3);
+extern "C" int isRectangle(int points[2][4]);
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -13,9 +15,9 @@ namespace PolygonCheckerUnitTest
 
 //-------------TRIANGLE SOLVER TESTS--------------//
 
-		TEST_METHOD(TestMethod1)
+		TEST_METHOD(analyzeTriangleFunctionality)
 		{
-
+			
 
 		}
 
