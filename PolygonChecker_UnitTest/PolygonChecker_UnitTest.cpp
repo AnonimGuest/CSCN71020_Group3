@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 
+
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace PolygonCheckerUnitTest
@@ -11,6 +13,8 @@ namespace PolygonCheckerUnitTest
 		
 		TEST_METHOD(TestMethod1)
 		{
+
+
 		}
 	};
 }
