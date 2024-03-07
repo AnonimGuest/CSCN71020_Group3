@@ -2,6 +2,8 @@
 #include "CppUnitTest.h"
 #include <stdbool.h>
 
+
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace PolygonCheckerUnitTest
