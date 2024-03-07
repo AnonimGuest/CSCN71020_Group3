@@ -8,6 +8,9 @@ order the points are entered, no lines will cross. This approach is worth extra 
 
 bool isRectangle(int points[2][4]) {
 
+	int point1x = points[1, 1];
+	int point1y = points[2, 1];
+
 	return true;
 
 }
