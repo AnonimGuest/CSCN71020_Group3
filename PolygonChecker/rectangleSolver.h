@@ -1,2 +1,2 @@
 #pragma once
-bool isRectangle(int points[2][4]);
+bool isRectangle(int points[4][2]);
