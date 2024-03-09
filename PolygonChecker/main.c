@@ -4,7 +4,6 @@
 #include "main.h"
 #include "triangleSolver.h"
 #include "rectangleSolver.h"
-#include <math.h>
 
 int main() {
 	bool continueProgram = true;
