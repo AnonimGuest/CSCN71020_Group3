@@ -15,12 +15,12 @@ bool isRectangle(int points[4][2]) {
 
 	findCorners(points, bottom_left, bottom_right, top_left, top_right);
 
-	float side3 = calculateSideLength(top_left, top_right);
-	float side4 = calculateSideLength(top_right, bottom_right);
-	float side1 = calculateSideLength(bottom_right, bottom_left);
-	float side2 = calculateSideLength(bottom_left, top_left);
+	float side1 = calculateSideLength(top_left, top_right);
+	float side2 = calculateSideLength(top_right, bottom_right);
+	float side3 = calculateSideLength(bottom_right, bottom_left);
+	float side4 = calculateSideLength(bottom_left, top_left);
 
-	return true;
+	return (side1 == side3) && (side2 == side4);
 }
 
 //identifiying the corners
@@ -55,7 +55,7 @@ void findCorners(int points[4][2], int bottom_left[2], int bottom_right[2], int 
 }
 
 float calculateSideLength(int point1[2], int point2[2]){
-	//harjas add your code for side length here ******
+	return sqrt(pow((point2[0] - point1[0]), 2) + pow((point2[1] - point1[1]), 2));
 }
 
 float calculatePerimeter(float line1, float line2, float line3, float line4) {

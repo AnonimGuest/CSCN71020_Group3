@@ -45,8 +45,6 @@ int main() {
 			break;
 		}
 	}
-	int pointsArray[4][2] = { {2, 3}, {3, 4}, {5, 6}, {8, 9} };
-	isRectangle(pointsArray);
 	
 	return 0;
 }
@@ -130,23 +128,4 @@ bool gatherAndCheckPoints(int points[NUMBER_OF_POINTS][2]) {
     return true;
 }
 
-// Function to check if the points form a rectangle
-bool isRectangle(int points[NUMBER_OF_POINTS][2]) {
-    // Implement the logic to check if the points form a rectangle
-
-    // Calculate distances between consecutive points
-    float side1 = sqrt(pow(points[0][0] - points[1][0], 2) + pow(points[0][1] - points[1][1], 2));
-    float side2 = sqrt(pow(points[1][0] - points[2][0], 2) + pow(points[1][1] - points[2][1], 2));
-    float side3 = sqrt(pow(points[2][0] - points[3][0], 2) + pow(points[2][1] - points[3][1], 2));
-    float side4 = sqrt(pow(points[3][0] - points[0][0], 2) + pow(points[3][1] - points[0][1], 2));
-
-    // Check if opposite sides are equal
-    bool oppositeSidesEqual = (side1 == side3) && (side2 == side4);
-
-    // Check if opposite sides are parallel (checking slopes)
-    bool oppositeSidesParallel = (points[1][0] - points[0][0]) * (points[2][1] - points[3][1]) ==
-                                 (points[2][0] - points[3][0]) * (points[1][1] - points[0][1]);
-
-    return oppositeSidesEqual && oppositeSidesParallel;
-}
 
