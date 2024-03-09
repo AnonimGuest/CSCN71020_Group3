@@ -1,29 +1,28 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdbool.h>
-// Alexa 
 #include "main.h"
 #include "triangleSolver.h"
 #include "rectangleSolver.h"
 
-int side = 0;
 
 int main() {
 	bool continueProgram = true;
 	while (continueProgram) {
+		
 		printWelcome();
-
+		
 		int shapeChoice = printShapeMenu();
 
-		switch (shapeChoice)
-		{
+		switch (shapeChoice) {
 		case 1:
 			printf_s("Triangle selected.\n");
-			int triangleSides[3] = { 0, 0, 0 };
-			int* triangleSidesPtr = getTriangleSides(triangleSides);
-			//printf_s("! %d\n", triangleSidesPtr[0]);
-			char* result = analyzeTriangle(triangleSidesPtr[0], triangleSidesPtr[1], triangleSidesPtr[2]);
-			printf_s("%s\n", result);
+			double triangleSides[3] = { 0.0, 0.0, 0.0 };
+			double* triangleSidesPtr = getTriangleSides(triangleSides);
 			break;
+		case 2:
+			printf_s("Rectangle selected.\n");
+			break; 
 		case 0:
 			continueProgram = false;
 			break;
@@ -43,24 +42,49 @@ void printWelcome() {
 	printf_s(" **********************\n");
 }
 
-int printShapeMenu() {
-	printf_s("1. Triangle\n");
-	printf_s("2.Rectangle\n");
-	printf_s("0. Exit\n");
 
-	int shapeChoice;
+int printShapeMenu() { 
+	double shapeChoice;
 
-	printf_s("Enter number: ");
-	scanf_s("%1o", &shapeChoice);
+	while (1) {
+		printf_s("1. Triangle\n");
+		printf_s("2. Rectangle\n");
+		printf_s("0. Exit\n");
 
-	return shapeChoice;
+		printf_s("Enter number: ");
+
+		if (scanf_s("%lf", &shapeChoice) != 1 || (int)shapeChoice != shapeChoice || (shapeChoice < 0 || shapeChoice > 2)) {
+			printf_s("Invalid input. Please enter a valid integer.\n\n");
+			while (getchar() != '\n');
+		}
+		else {
+			break;
+		}
+	}
+	return (int)shapeChoice;
 }
 
-int* getTriangleSides(int* triangleSides) {
-	printf_s("Enter the three sides of the triangle: ");
-	for (int i = 0; i < 3; i++)
-	{
-		scanf_s("%d", &triangleSides[i]);
+
+double* getTriangleSides(double* triangleSides) {
+
+	const char* sideNames[3] = {"first", "second", "third"};
+
+	for (int i = 0; i < 3; ++i) {
+		do {
+			printf("Enter %s side of the triangle: ", sideNames[i]);
+			if (scanf_s("%lf", &triangleSides[i]) != 1 || triangleSides[i] <= 0) {
+				printf("Invalid input. Please enter a positive number.\n");
+				while (getchar() != '\n');
+			}
+			else {
+				break;
+			}
+		} while (1);
 	}
+
+	const char* triangleType = analyzeTriangle(triangleSides[0], triangleSides[1], triangleSides[2]);
+	printf("Triangle type: %s\n", triangleType);
+
 	return triangleSides;
 }
+
