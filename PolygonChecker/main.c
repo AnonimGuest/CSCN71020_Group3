@@ -26,7 +26,7 @@ int main() {
                 if (gatherAndCheckPoints(pointsArray)) {
                     // Check if the points form a rectangle
                     if (isRectangle(pointsArray)) {
-                        printf("The points form a rectangle.\n");
+                        printf("The points form a rectangle.\n"); // remove this add your function instead
 
                         // Additional logic or calculations for a rectangle can be added here
 
