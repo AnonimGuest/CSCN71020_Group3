@@ -31,6 +31,9 @@ int main() {
 			break;
 		}
 	}
+	int pointsArray[4][2] = { {2, 3}, {3, 4}, {5, 6}, {8, 9} };
+	isRectangle(pointsArray);
+	
 	return 0;
 }
 

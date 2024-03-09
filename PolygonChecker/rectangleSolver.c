@@ -15,21 +15,22 @@ then connect the corners to form the shape. Using this approach, no matter the
 order the points are entered, no lines will cross. This approach is worth extra marks.*/
 
 #define NUMBEROFPOINTS 4
-//define x and y to replace 0 and 1
+//define x and y to replace 0 and 1 later
+
+//function definitions
+int findCornerArray(int points[4][2]);
 
 bool isRectangle(int points[4][2]) {
-
+	findCornerArray(points);
 	return true;
-
 }
 
-int findCornerArray(int points[2][4]) {
+int findCornerArray(int points[4][2]) {
 	//identifiying the corners:
 	//top-left:min x, max y
 	//top-right:max x, max y
 	//bottom-left:min x, min y
 	//bottom-right: max x, min y
-
 	//setting initial min and max coordinates
 	int minX = points[0][0];
 	int minY = points[0][1];
@@ -52,22 +53,39 @@ int findCornerArray(int points[2][4]) {
 			maxY = points[array_counter][1];
 		}
 	}
+	//for debugging (remove later)
+	printf("%d, %d, %d, %d", maxX, maxY, minX, minY);
 
 	//find which corner each is and put into a corner array
-	//identifiying the corners:
-	//top-left:min x, max y
-	//top-right:max x, max y
-	//bottom-left:min x, min y
-	//bottom-right: max x, min y
+	//maybe create a struct for lines & points?? would be easier
 	int sorted_corner_array[2][4]; //IN ORDER: top-lft, top-right, bottom-left, bottom-right
 	for (int counter = 0; counter < NUMBEROFPOINTS; counter++) {
+		//top-left corner (minX, maxY)
+		if (points[counter][0] == minX && points[counter][1] == maxY) {
+			sorted_corner_array[0][0] = points[counter][0];
+			sorted_corner_array[0][1] = points[counter][1];
+		}
+		//top-right corner (maxX, maxY)
+		if (points[counter][0] == maxX && points[counter][1] == maxY) {
+			sorted_corner_array[0][0] = points[counter][0];
+			sorted_corner_array[0][1] = points[counter][1];
+		}
+		//bottom-left corner (minX, minY)
 		if (points[counter][0] == minX && points[counter][1] == minY) {
 			sorted_corner_array[0][0] = points[counter][0];
 			sorted_corner_array[0][1] = points[counter][1];
 		}
+		//bottom-right corner (maxX, minY)
+		if (points[counter][0] == maxX && points[counter][1] == minY) {
+			sorted_corner_array[0][0] = points[counter][0];
+			sorted_corner_array[0][1] = points[counter][1];
+		}
 	}
-
+	return sorted_corner_array;
 }
+
+
+
 
 float calculatePerimeter(float line1, float line2, float line3, float line4) {
 	return (line1 + line2 + line3 + line4);
@@ -78,3 +96,27 @@ float calculateArea(float line1, float line2, float line3, float line4) {
 	//in the case of a square same length is multiplied
 	return (line1 == line2) ? (line1 * line3) : (line1 * line2);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
