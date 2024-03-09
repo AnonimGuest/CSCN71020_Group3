@@ -7,6 +7,7 @@
 
 int main() {
 	bool continueProgram = true;
+
 	while (continueProgram) {
 		
 		printWelcome();
@@ -21,14 +22,20 @@ int main() {
 			break;
 		case 2:
 			printf_s("Rectangle selected.\n");
+			int pointsArray[4][2];
                 // Gather and check points for a rectangle
                 if (gatherAndCheckPoints(pointsArray)) {
                     // Check if the points form a rectangle
                     if (isRectangle(pointsArray)) {
-                        printf("The points form a rectangle.\n"); // remove this add your function instead
+                        printf("The points form a rectangle.\n"); 
+						//find side lengths 
+						int line1 = calculateSideLength(pointsArray[0], pointsArray[1]);
+						int line2 = calculateSideLength(pointsArray[1], pointsArray[2]);
+						int line3 = calculateSideLength(pointsArray[2], pointsArray[3]);
+						int line4 = calculateSideLength(pointsArray[3], pointsArray[0]);
 
-                        // Additional logic or calculations for a rectangle can be added here
-
+						printf("The perimeter of the rectangle is: %d\n", calculatePerimeter(line1, line2, line3, line4));
+						printf("The area of the rectangle is: %d\n", calculateArea(line1, line2, line3, line4));
                     } else {
                         printf("The points do not form a rectangle.\n");
                     }
