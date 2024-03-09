@@ -7,7 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PolygonChecker", "PolygonCh
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PolygonChecker_UnitTest", "PolygonChecker_UnitTest\PolygonChecker_UnitTest.vcxproj", "{A148D9BE-0568-4A2F-8A6F-38002F8C5A35}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RectangleSolverTests", "RectangleSolverTests\RectangleSolverTests.vcxproj", "{9EAB35E8-497C-4C29-9EC2-14D2E447E680}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RectangleSolver_UnitTest", "RectangleSolverTests\RectangleSolverTests.vcxproj", "{9EAB35E8-497C-4C29-9EC2-14D2E447E680}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
