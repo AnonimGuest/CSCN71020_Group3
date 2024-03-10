@@ -3,6 +3,8 @@
 #include <math.h>
 
 #define NUMBEROFPOINTS 4
+#define PI 3.14
+#define RIGHTANGLE 90
 
 //function definitions
 void findCorners(int points[4][2], int bottom_left[2], int bottom_right[2], int top_left[2], int top_right[2]);
@@ -16,14 +18,17 @@ bool isRectangle(int points[4][2]) {
 
 	findCorners(points, bottom_left, bottom_right, top_left, top_right);
 
-	int side1 = calculateSideLength(top_left, top_right);
-	int side2 = calculateSideLength(top_right, bottom_right);
-	int side3 = calculateSideLength(bottom_right, bottom_left);
-	int side4 = calculateSideLength(bottom_left, top_left);
+	int side1 = calculateSideLength(top_left, top_right); //top side
+	int side2 = calculateSideLength(top_right, bottom_right); //right side
+	int side3 = calculateSideLength(bottom_right, bottom_left); //bottom side
+	int side4 = calculateSideLength(bottom_left, top_left); //left side
 
-	//NEED ANGLE CODE FROM TRIANGLE CODE TO CHECK FOR RIGHT ANGLES HERE
+	int diagonal1 = calculateSideLength(top_left, bottom_right);
+	int diagonal2 = calculateSideLength(top_right, bottom_left);
 
-	return side1 == side3 && side2 == side4;
+	////NEED ANGLE CODE FROM TRIANGLE CODE TO CHECK FOR RIGHT ANGLES HERE
+
+	return (side1 == side3 && side2 == side4) && (diagonal1 == diagonal2) ;
 }
 
 //identifiying the corners
