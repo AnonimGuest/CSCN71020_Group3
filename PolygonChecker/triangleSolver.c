@@ -5,9 +5,8 @@
 #include "triangleSolver.h"
 #define SumAngles 180
 
-
-char* analyzeTriangle(int side1, int  side2, int side3) {
-	char* result = "";
+const char* analyzeTriangle(int side1, int side2, int side3) {
+	const char* result = "";
 
 	if (side1 <= 0 || side2 <= 0 || side3 <= 0) {
 		result = "Not a triangle";
