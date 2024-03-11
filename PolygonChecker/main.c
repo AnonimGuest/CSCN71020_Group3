@@ -114,6 +114,7 @@ bool gatherAndCheckPoints(int points[NUMBER_OF_POINTS][2]) {
 
     for (int i = 0; i < NUMBER_OF_POINTS; ++i) {
         printf("Point %d: ", i + 1);
+		
 
         // Validate input for x coordinate
         if (scanf("%d", &points[i][0]) != 1) {
