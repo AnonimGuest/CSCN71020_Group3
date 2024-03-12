@@ -20,10 +20,10 @@ const char* analyzeTriangle(int side1, int side2, int side3) {
 		int angles = SumAngles / 3;
 		printf("Angles: %d\n", angles);
 	}
-	else if ((side1 == side2 && side1 != side3) ||
-		(side1 == side3 && side1 != side2))
-	{
+	else if ((side1 == side2 && side1 != side3) || (side1 == side3 && side1 != side2)) {
+
 		result = "Isosceles triangle";
+	}
 
 		// angle calculation - Isosceles 
 
@@ -43,33 +43,35 @@ const char* analyzeTriangle(int side1, int side2, int side3) {
 			printf("Angle 2: %.2lf\n", r2 * 180 / 3.14);
 			printf("Angle 3: %.2lf\n", r4);
 
+			}
+			else {
+				result = "Scalene triangle";
+				double cosA, BcosA, sinA, BsinA, r1, r2, r3, r4;
+
+				// angle calculation -- Scalene 
+
+				// First Angle
+				cosA = pow(side3, 2) - pow(side1, 2) - pow(side2, 2);
+				BcosA = -2 * (side1) * (side2);
+				r1 = cosA / BcosA;
+				r2 = (acos(r1));
+
+				//Second Angle
+				sinA = (sin(r2) * (side1));
+				BsinA = sinA / side3;
+				r3 = (asin(BsinA));
+
+				printf("Angle 1: %.2lf\n", r2 * 180 / 3.14);
+				printf("Angle 2: %.2lf\n", r3 * 180 / 3.14);
+
+				// Thrid Angle
+				r4 = SumAngles - r2 * 180 / 3.14 - r3 * 180 / 3.14;
+				printf("Angle 3: %.2lf\n", r4);
+
+			}
+
+			return result;
 		}
-		else {
-			result = "Scalene triangle";
-			double cosA, BcosA, sinA, BsinA, r1, r2, r3, r4;
 
-			// angle calculation -- Scalene 
+	
 
-			// First Angle
-			cosA = pow(side3, 2) - pow(side1, 2) - pow(side2, 2);
-			BcosA = -2 * (side1) * (side2);
-			r1 = cosA / BcosA;
-			r2 = (acos(r1));
-
-			//Second Angle
-			sinA = (sin(r2) * (side1));
-			BsinA = sinA / side3;
-			r3 = (asin(BsinA));
-
-			printf("Angle 1: %.2lf\n", r2 * 180 / 3.14);
-			printf("Angle 2: %.2lf\n", r3 * 180 / 3.14);
-
-			// Thrid Angle
-			r4 = SumAngles - r2 * 180 / 3.14 - r3 * 180 / 3.14;
-			printf("Angle 3: %.2lf\n", r4);
-			
-
-		}
-		return result;
-	}
-}
