@@ -139,6 +139,15 @@ bool gatherAndCheckPoints(int points[NUMBER_OF_POINTS][2]) {
 		while (getchar() != '\n');
 	}
 
+    // Test the function with some test cases
+    //bool success = gatherAndCheckPoints(points);
+    //if (success) {
+        //printf("Points successfully gathered.\n");
+        // Now you can use the points array for further processing
+    //} else {
+        //printf("Failed to gather points.\n");
+    //}
+
 	return true;
 }
 
