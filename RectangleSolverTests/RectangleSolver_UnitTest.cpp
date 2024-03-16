@@ -1,4 +1,5 @@
 #include "pch.h"
+#include <stdbool.h>
 #include "CppUnitTest.h"
 
 extern "C" int isRectangle(int points[4][2]);
@@ -11,6 +12,7 @@ namespace RectangleSolver_UnitTest
 	{
 	public:
 		//------------INPUT VALIDATION TESTS --------------//
+		
 		//-------------RECTANGLE SOLVER TESTS--------------//
 		TEST_METHOD(isRectangleTest_validInput_returnsTrue)
 		{
