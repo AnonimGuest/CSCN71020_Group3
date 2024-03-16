@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+#define  _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdbool.h>
 #include "main.h"
@@ -110,29 +110,44 @@ double* getTriangleSides(double* triangleSides) {
 }
 
 bool gatherAndCheckPoints(int points[NUMBER_OF_POINTS][2]) {
-    printf("Enter coordinates for four points (x y):\n");
+	printf("Enter coordinates for four points (x y):\n");
 
-    for (int i = 0; i < NUMBER_OF_POINTS; ++i) {
-        printf("Point %d: ", i + 1);
-		
+	for (int i = 0; i < NUMBER_OF_POINTS; ++i) {
+		printf("Point %d: ", i + 1);
 
-        // Validate input for x coordinate
-        if (scanf("%d", &points[i][0]) != 1) {
-            printf("Invalid input for x coordinate.\n");
-            return false;
-        }
+		char input[100];
+		if (fgets(input, sizeof(input), stdin) == NULL) {
+			printf("Error reading input.\n");
+			return false;
+		}
 
-        // Validate input for y coordinate
-        if (scanf("%d", &points[i][1]) != 1) {
-            printf("Invalid input for y coordinate.\n");
-            return false;
-        }
-    }
+		// Parse input using sscanf
+		if (sscanf(input, "%d %d", &points[i][0], &points[i][1]) != 2) {
+			printf("Invalid input format.\n");
+			return false;
+		}
 
-    // Clear input buffer
-    while (getchar() != '\n');
+		// Check for duplicate points
+		for (int j = 0; j < i; ++j) {
+			if (points[i][0] == points[j][0] && points[i][1] == points[j][1]) {
+				printf("Error: Duplicate points detected.\n");
+				return false;
+			}
+		}
 
-    return true;
+		// Clear input buffer
+		while (getchar() != '\n');
+	}
+
+    // Test the function with some test cases
+    //bool success = gatherAndCheckPoints(points);
+    //if (success) {
+        //printf("Points successfully gathered.\n");
+        // Now you can use the points array for further processing
+    //} else {
+        //printf("Failed to gather points.\n");
+    //}
+
+	return true;
 }
-
 
