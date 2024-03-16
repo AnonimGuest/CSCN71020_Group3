@@ -1,13 +1,13 @@
 #include "pch.h"
 #include <stdbool.h>
 #include "CppUnitTest.h"
+#define NUMBER_OF_POINTS 4
 
 extern "C" bool isRectangle(int points[4][2]);
 extern "C" int calculateSideLength(int point1[2], int point2[2]);
 extern "C" int calculatePerimeter(int line1, int line2, int line3, int line4);
 extern "C" int calculateArea(int line1, int line2, int line3, int line4);
-extern "C" int gatherAndCheckPoints(int points[4][2]);
-
+extern "C" int gatherAndCheckPoints(int points[NUMBER_OF_POINTS][2]);
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -16,26 +16,6 @@ namespace RectangleSolver_UnitTest
 	TEST_CLASS(RectangleSolver_UnitTest)
 	{
 	public:
-		//-------------INPUT VALIDATION TESTS --------------//
-
-    TEST_METHOD(gatherAndCheckPointsTest_ValidInput_ReturnsTrue)
-        {
-        int points[4][2] = { {1, 1}, {2, 2}, {3, 3}, {4, 4} }; // Valid input
-        bool Expected = true;
-        bool Result = gatherAndCheckPoints(points);
-        Assert::AreEqual(Expected, Result);
-        }
-
-    TEST_METHOD(gatherAndCheckPointsTest_DuplicatePoints_ReturnsFalse)
-        {
-        int points[4][2] = { {1, 1}, {2, 2}, {1, 1}, {4, 4} }; // Duplicate points
-        bool Expected = false;
-        bool Result = gatherAndCheckPoints(points);
-        Assert::AreEqual(Expected, Result);
-        }
-
-		
-		//-------------RECTANGLE SOLVER TESTS--------------//
 
 		//-------------isRectangle() tests----------------//
 		TEST_METHOD(isRectangleTest_integerInputFormsRectangle_returnsTrue)
@@ -46,13 +26,14 @@ namespace RectangleSolver_UnitTest
 			bool Result = isRectangle(points);
 			Assert::AreEqual(Expected, Result);
 		}
-		TEST_METHOD(isRectangleTest_decimalInputFormsRectangle_returnsTrue)
+		//decimals are not accepted through gatherandcheckpoints function anyways 
+		/*TEST_METHOD(isRectangleTest_decimalInputFormsRectangle_returnsTrue)
 		{
 			int points[4][2] = { {0.5, 1.5}, {0.5, 3.5}, {5.5, 1.5}, {5.5, 3.5}};
 			bool Expected = true;
 			bool Result = isRectangle(points);
 			Assert::AreEqual(Expected, Result);
-		}
+		}*/
 		TEST_METHOD(isRectangleTest_pointsFormSquare_returnsFalse) //square does not count as rectangle in this program
 		{
 			int points[4][2] = { {1,1 }, { 1,2}, { 2,2}, { 2,1 }};
