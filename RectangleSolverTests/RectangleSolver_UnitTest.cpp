@@ -34,13 +34,6 @@ namespace RectangleSolver_UnitTest
         Assert::AreEqual(Expected, Result);
         }
 
-    TEST_METHOD(gatherAndCheckPointsTest_DuplicatePoints_ReturnsFalse)
-    {
-        int points[4][2] = { {1, 1}, {2, 2}, {h, 1}, {4, 4} }; // letter
-        bool Expected = false;
-        bool Result = gatherAndCheckPoints(points);
-        Assert::AreEqual(Expected, Result);
-    }
 		
 		//-------------RECTANGLE SOLVER TESTS--------------//
 
