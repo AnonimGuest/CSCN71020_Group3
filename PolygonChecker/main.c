@@ -1,9 +1,19 @@
 #define  _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
 #include "main.h"
 #include "triangleSolver.h"
 #include "rectangleSolver.h"
+
+void printWelcome() {
+    printf_s("\n");
+    printf_s(" **********************\n");
+    printf_s("**     Welcome to     **\n");
+    printf_s("**   Polygon Checker  **\n");
+    printf_s(" **********************\n");
+}
 
 int main() {
 	bool continueProgram = true;
@@ -55,22 +65,13 @@ int main() {
 	return 0;
 }
 
-void printWelcome() {
-	printf_s("\n");
-	printf_s(" **********************\n");
-	printf_s("**     Welcome to     **\n");
-	printf_s("**   Polygon Checker  **\n");
-	printf_s(" **********************\n");
-}
-
-
 int printShapeMenu() { 
 	double shapeChoice;
 
 	while (1) {
-		printf_s("1. Triangle\n");
-		printf_s("2. Rectangle\n");
-		printf_s("0. Exit\n");
+        printf_s("1. Triangle\n");
+        printf_s("2. Rectangle\n");
+        printf_s("0. Exit\n");
 
 		printf_s("Enter number: ");
 
@@ -85,28 +86,46 @@ int printShapeMenu() {
 	return (int)shapeChoice;
 }
 
-
 double* getTriangleSides(double* triangleSides) {
+    const char* sideNames[3] = { "first", "second", "third" };
 
-	const char* sideNames[3] = {"first", "second", "third"};
+    for (int i = 0; i < 3; ++i) {
+        do {
+            printf("Enter %s side of the triangle: ", sideNames[i]);
 
-	for (int i = 0; i < 3; ++i) {
-		do {
-			printf("Enter %s side of the triangle: ", sideNames[i]);
-			if (scanf_s("%lf", &triangleSides[i]) != 1 || triangleSides[i] <= 0) {
-				printf("Invalid input. Please enter a positive number.\n");
-				while (getchar() != '\n');
-			}
-			else {
-				break;
-			}
-		} while (1);
-	}
+            char input[20];
+            if (fgets(input, sizeof(input), stdin) == NULL) {
+                printf("Error reading input.\n");
+                exit(1);
+            }
 
-	const char* triangleType = analyzeTriangle(triangleSides[0], triangleSides[1], triangleSides[2]);
-	printf("Triangle type: %s\n", triangleType);
+            char* endptr;
+            double value = strtod(input, &endptr);
+            if (endptr == input || *endptr != '\n') {
+                printf("Invalid input. Please enter a valid number.\n");
+                continue;
+            }
 
-	return triangleSides;
+            if (value <= 0) {
+                printf("Invalid input. Please enter a positive number.\n");
+                continue;
+            }
+
+            if (input[0] == '.') {
+                 printf("Invalid input. Please enter a valid number.\n");
+                 continue;
+            }
+
+            triangleSides[i] = value;
+            break;
+
+        } while (1);
+    }
+
+    const char* triangleType = analyzeTriangle(triangleSides[0], triangleSides[1], triangleSides[2]);
+    printf("Triangle type: %s\n", triangleType);
+
+    return triangleSides;
 }
 
 bool gatherAndCheckPoints(int points[NUMBER_OF_POINTS][2]) {

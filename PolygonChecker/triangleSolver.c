@@ -30,7 +30,7 @@ int triangleEqual(int side1, int side2, int side3) {
 	
 	if(side1 == side2 && side1 == side3) {
 		// angle calculation -- Equilateral 
-		int angles = SumAngles / 3;
+		int angles = SumAngles / 3.0;
 		printf("Angles: %d\n", angles);
 	}
 }
