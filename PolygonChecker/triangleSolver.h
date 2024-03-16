@@ -1,7 +1,11 @@
 #pragma once
 
-const char* analyzeTriangle(double side1, double side2, double side3);
+const char* analyzeTriangle(int side1, int side2, int side3);
 
-double triangleEquations(double side1, double side2, double side3);
+int triangleEqual(int side1, int side2, int side3);
+
+int triangleScalene(int side1, int side2, int side3);
+
+int triangleIsos(int side1, int side2, int side3);
 
 
