@@ -10,11 +10,11 @@ namespace RectangleSolver_UnitTest
 	TEST_CLASS(RectangleSolver_UnitTest)
 	{
 	public:
-		
+		//------------INPUT VALIDATION TESTS --------------//
 		//-------------RECTANGLE SOLVER TESTS--------------//
 		TEST_METHOD(isRectangleTest_validInput_returnsTrue)
 		{
-			int points[4][2] = { (1,2), (3,4), (4,5), (6,7) };
+			int points[4][2] = { (1,1), (3,4), (4,5), (6,7) };
 			bool Expected = true;
 			bool Result = isRectangle(points);
 			Assert::AreEqual(Expected, Result);
