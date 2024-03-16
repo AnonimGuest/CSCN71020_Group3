@@ -16,22 +16,18 @@ namespace RectangleSolver_UnitTest
 	public:
 		//-------------INPUT VALIDATION TESTS --------------//
 
-        TEST_METHOD(ValidInputForXCoordinate)
+        TTEST_METHOD(ValidInputTest)
         {
-        int points[NUMBER_OF_POINTS][2] = { 0 };
-        int inputX = 5;
+        int testPoints[NUMBER_OF_POINTS][2];
+        bool result = gatherAndCheckPoints(testPoints);
+        Assert::IsTrue(result, L"Valid input test failed");
+        }
 
-        // Redirect stdin to provide input
-        freopen("input.txt", "w", stdin);
-        fprintf(stdin, "%d\n", inputX);
-        fclose(stdin);
-
-        // Call the function under test
-        bool result = gatherAndCheckPoints(points);
-
-        // Assert
-        Assert::IsTrue(result);
-        Assert::AreEqual(inputX, points[0][0]);
+    TEST_METHOD(DuplicatePointsTest)
+        {
+        int testPoints[NUMBER_OF_POINTS][2] = { {1, 2}, {3, 4}, {1, 2}, {5, 6} };
+        bool result = gatherAndCheckPoints(testPoints);
+        Assert::IsFalse(result, L"Duplicate points test failed");
         }
 		
 		//-------------RECTANGLE SOLVER TESTS--------------//
