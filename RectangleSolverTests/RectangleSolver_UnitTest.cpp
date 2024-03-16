@@ -16,19 +16,29 @@ namespace RectangleSolver_UnitTest
 	public:
 		//-------------INPUT VALIDATION TESTS --------------//
 
-        TTEST_METHOD(ValidInputTest)
+    TEST_METHOD(gatherAndCheckPointsTest_ValidInput_ReturnsTrue)
         {
-        int testPoints[NUMBER_OF_POINTS][2];
-        bool result = gatherAndCheckPoints(testPoints);
-        Assert::IsTrue(result, L"Valid input test failed");
+        int points[4][2] = { {1, 1}, {2, 2}, {3, 3}, {4, 4} }; // Valid input
+        bool Expected = true;
+        bool Result = gatherAndCheckPoints(points);
+        Assert::AreEqual(Expected, Result);
         }
 
-    TEST_METHOD(DuplicatePointsTest)
+    TEST_METHOD(gatherAndCheckPointsTest_DuplicatePoints_ReturnsFalse)
         {
-        int testPoints[NUMBER_OF_POINTS][2] = { {1, 2}, {3, 4}, {1, 2}, {5, 6} };
-        bool result = gatherAndCheckPoints(testPoints);
-        Assert::IsFalse(result, L"Duplicate points test failed");
+        int points[4][2] = { {1, 1}, {2, 2}, {1, 1}, {4, 4} }; // Duplicate points
+        bool Expected = false;
+        bool Result = gatherAndCheckPoints(points);
+        Assert::AreEqual(Expected, Result);
         }
+
+    TEST_METHOD(gatherAndCheckPointsTest_DuplicatePoints_ReturnsFalse)
+    {
+        int points[4][2] = { {1, 1}, {2, 2}, {h, 1}, {4, 4} }; // letter
+        bool Expected = false;
+        bool Result = gatherAndCheckPoints(points);
+        Assert::AreEqual(Expected, Result);
+    }
 		
 		//-------------RECTANGLE SOLVER TESTS--------------//
 
