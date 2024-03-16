@@ -7,7 +7,6 @@ extern "C" bool isRectangle(int points[4][2]);
 extern "C" int calculateSideLength(int point1[2], int point2[2]);
 extern "C" int calculatePerimeter(int line1, int line2, int line3, int line4);
 extern "C" int calculateArea(int line1, int line2, int line3, int line4);
-extern "C" int gatherAndCheckPoints(int points[NUMBER_OF_POINTS][2]);
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
