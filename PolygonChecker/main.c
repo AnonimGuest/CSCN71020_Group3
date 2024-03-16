@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+#define  _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdbool.h>
 #include "main.h"
@@ -114,7 +114,7 @@ bool gatherAndCheckPoints(int points[NUMBER_OF_POINTS][2]) {
 
     for (int i = 0; i < NUMBER_OF_POINTS; ++i) {
         printf("Point %d: ", i + 1);
-		
+
 
         // Validate input for x coordinate
         if (scanf("%d", &points[i][0]) != 1) {
@@ -127,12 +127,18 @@ bool gatherAndCheckPoints(int points[NUMBER_OF_POINTS][2]) {
             printf("Invalid input for y coordinate.\n");
             return false;
         }
+
+        for (int j = 0; j < i; ++j) {
+            if (points[i][0] == points[j][0] && points[i][1] == points[j][1]) {
+                printf("Error: Duplicate points detected.\n");
+                return false;
+            }
+        }
+
+        // Clear input buffer
+        while (getchar() != '\n');
+
+        return true;
     }
-
-    // Clear input buffer
-    while (getchar() != '\n');
-
-    return true;
 }
-
 
