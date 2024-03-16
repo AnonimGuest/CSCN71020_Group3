@@ -16,6 +16,23 @@ namespace RectangleSolver_UnitTest
 	public:
 		//-------------INPUT VALIDATION TESTS --------------//
 
+        TEST_METHOD(ValidInputForXCoordinate)
+        {
+        int points[NUMBER_OF_POINTS][2] = { 0 };
+        int inputX = 5;
+
+        // Redirect stdin to provide input
+        freopen("input.txt", "w", stdin);
+        fprintf(stdin, "%d\n", inputX);
+        fclose(stdin);
+
+        // Call the function under test
+        bool result = gatherAndCheckPoints(points);
+
+        // Assert
+        Assert::IsTrue(result);
+        Assert::AreEqual(inputX, points[0][0]);
+        }
 		
 		//-------------RECTANGLE SOLVER TESTS--------------//
 
