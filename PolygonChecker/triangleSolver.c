@@ -5,7 +5,9 @@
 
 #define SumAngles 180
 
-const char* analyzeTriangle(double side1, double side2, double side3) {
+
+
+const char* analyzeTriangle(int side1, int side2, int side3) {
 	const char* result = "";
 
 	if (side1 <= 0 || side2 <= 0 || side3 <= 0) {
