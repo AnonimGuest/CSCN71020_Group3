@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
+#include "rectangleSolver.h"
 
 #define NUMBEROFPOINTS 4
 #define PI 3.14
@@ -96,3 +97,4 @@ int calculateArea(int line1, int line2, int line3, int line4) {
 	//checks to make sure the different length sides are multiplied
 	return (line1 == line2) ? (line1 * line3) : (line1 * line2);
 }
+

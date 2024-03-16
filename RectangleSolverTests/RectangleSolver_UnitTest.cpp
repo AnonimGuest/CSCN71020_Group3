@@ -1,6 +1,7 @@
 #include "pch.h"
 #include <stdbool.h>
 #include "CppUnitTest.h"
+#define NUMBER_OF_POINTS 4
 
 extern "C" bool isRectangle(int points[4][2]);
 extern "C" int calculateSideLength(int point1[2], int point2[2]);
@@ -24,7 +25,7 @@ namespace RectangleSolver_UnitTest
 			bool Result = isRectangle(points);
 			Assert::AreEqual(Expected, Result);
 		}
-		//the gatherandcheckpoints function does not allow decimals already
+		//decimals are not accepted through gatherandcheckpoints function anyways 
 		/*TEST_METHOD(isRectangleTest_decimalInputFormsRectangle_returnsTrue)
 		{
 			int points[4][2] = { {0.5, 1.5}, {0.5, 3.5}, {5.5, 1.5}, {5.5, 3.5}};

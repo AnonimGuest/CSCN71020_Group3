@@ -110,35 +110,35 @@ double* getTriangleSides(double* triangleSides) {
 }
 
 bool gatherAndCheckPoints(int points[NUMBER_OF_POINTS][2]) {
-    printf("Enter coordinates for four points (x y):\n");
+	printf("Enter coordinates for four points (x y):\n");
 
-    for (int i = 0; i < NUMBER_OF_POINTS; ++i) {
-        printf("Point %d: ", i + 1);
+	for (int i = 0; i < NUMBER_OF_POINTS; ++i) {
+		printf("Point %d: ", i + 1);
 
+		char input[100];
+		if (fgets(input, sizeof(input), stdin) == NULL) {
+			printf("Error reading input.\n");
+			return false;
+		}
 
-        // Validate input for x coordinate
-        if (scanf("%d", &points[i][0]) != 1) {
-            printf("Invalid input for x coordinate.\n");
-            return false;
-        }
+		// Parse input using sscanf
+		if (sscanf(input, "%d %d", &points[i][0], &points[i][1]) != 2) {
+			printf("Invalid input format.\n");
+			return false;
+		}
 
-        // Validate input for y coordinate
-        if (scanf("%d", &points[i][1]) != 1) {
-            printf("Invalid input for y coordinate.\n");
-            return false;
-        }
+		// Check for duplicate points
+		for (int j = 0; j < i; ++j) {
+			if (points[i][0] == points[j][0] && points[i][1] == points[j][1]) {
+				printf("Error: Duplicate points detected.\n");
+				return false;
+			}
+		}
 
-        for (int j = 0; j < i; ++j) {
-            if (points[i][0] == points[j][0] && points[i][1] == points[j][1]) {
-                printf("Error: Duplicate points detected.\n");
-                return false;
-            }
-        }
+		// Clear input buffer
+		while (getchar() != '\n');
+	}
 
-        // Clear input buffer
-        while (getchar() != '\n');
-
-        return true;
-    }
+	return true;
 }
 
