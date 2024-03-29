@@ -8,85 +8,31 @@
 #define RIGHTANGLE 90
 
 //function definitions
-bool findCorners(int points[4][2], int bottom_left[2], int bottom_right[2], int top_left[2], int top_right[2]);
 int calculateSideLength(int point1[2], int point2[2]);
+void sortPoints(int points[NUMBEROFPOINTS][2], int point1[2], int point2[2], int point4[2], int point3[2]);
+void swapPlaces(int points[NUMBEROFPOINTS][2], int firstIndex, int secondIndex);
 
 bool isRectangle(int points[4][2]) {
-	int bottom_left[2];
-	int bottom_right[2];
-	int top_left[2];
-	int top_right[2];
+	int point1[2];
+	int point2[2];
+	int point4[2];
+	int point3[2];
+	sortPoints(points, point1, point2, point4, point3);
 
-	if (!findCorners(points, bottom_left, bottom_right, top_left, top_right)) {
-		return false;
-	}
-	else {
-		int top_side = calculateSideLength(top_left, top_right); //top side
-		int right_side = calculateSideLength(top_right, bottom_right); //right side
-		int bottom_side = calculateSideLength(bottom_right, bottom_left); //bottom side
-		int left_side = calculateSideLength(bottom_left, top_left); //left side
+	int side1 = calculateSideLength(point4, point3);
+	int side2 = calculateSideLength(point3, point2);
+	int side3 = calculateSideLength(point2, point1); 
+	int side4 = calculateSideLength(point1, point4); 
 
-		double diagonal1 = sqrt(top_side * top_side + right_side * right_side);
-		double diagonal2 = sqrt(bottom_side * bottom_side + left_side * left_side);
-		//printf("top_side: %d right_side: %d bottom_side: %d left_side: %d diag1: %f diag2: %f \n", top_side, right_side, bottom_side, left_side, sqrt(top_side * top_side + right_side * right_side), sqrt(bottom_side * bottom_side + left_side * left_side));
+	double diagonal1 = sqrt(side1 * side1 + side2 * side2);
+	double diagonal2 = sqrt(side3 * side3 + side4 * side4);
+	//printf("side1: %d side2: %d side3: %d side4: %d diag1: %f diag2: %f \n", side1, side2, side3, side4, sqrt(side1 * side1 + side2 * side2), sqrt(side3 * side3 + side4 * side4));
 
-		return (top_side == bottom_side && right_side == left_side && top_side != right_side) && (diagonal1 == diagonal2);
-	}
-}
-
-//identifiying the corners
-bool findCorners(int points[4][2], int bottom_left[2], int bottom_right[2], int top_left[2], int top_right[2]) {
-	//printf("Points:\n");
-	//for (int i = 0; i < NUMBEROFPOINTS; i++) {
-	//	printf("(%d, %d)\n", points[i][0], points[i][1]);
-	//}
-	//setting initial min and max coordinates
-	int minX = points[0][0];
-	int minY = points[0][1];
-	int maxX = points[0][0];
-	int maxY = points[0][1];
-
-	//setting actual min and max x&y
-	for (int array_counter = 0; array_counter < NUMBEROFPOINTS; array_counter++) {
-		minX = points[array_counter][0] < minX ? points[array_counter][0] : minX;
-		minY = points[array_counter][1] < minY ? points[array_counter][1] : minY;
-		maxX = points[array_counter][0] > maxX ? points[array_counter][0] : maxX;
-		maxY = points[array_counter][1] > maxY ? points[array_counter][1] : maxY;
-	}
-
-	//top-left:min x, max y, top-right:max x, max y
-    //bottom-left:min x, min y, bottom-right: max x, min y
-	for (int array_counter = 0; array_counter < NUMBEROFPOINTS; array_counter++) {
-		if (points[array_counter][0] == minX && points[array_counter][1] == maxY) { //top-left
-			top_left[0] = points[array_counter][0];
-			top_left[1] = points[array_counter][1];
-		}
-		else if ((points[array_counter][0] == maxX && points[array_counter][1] == maxY)) { //top-right
-			top_right[0] = points[array_counter][0];
-			top_right[1] = points[array_counter][1];
-		}
-		else if ((points[array_counter][0] == maxX && points[array_counter][1] == minY)) { //bottom-right
-			bottom_right[0] = points[array_counter][0];
-			bottom_right[1] = points[array_counter][1];
-		}
-		else if ((points[array_counter][0] == minX && points[array_counter][1] == minY)) { //bottom-left
-			bottom_left[0] = points[array_counter][0];
-			bottom_left[1] = points[array_counter][1];
-		}
-		else {
-			return false;
-		}
-	}
-	return true;
-	//printf("corners %d %d %d %d %d %d %d %d\n", bottom_left[0], bottom_left[1], bottom_right[0], bottom_right[1], top_left[0], top_left[1], top_right[0], top_right[1]);
+	return (side1 == side3 && side2 == side4 && side1 != side2) && (diagonal1 == diagonal2);
 }
 
 int calculateSideLength(int point1[2], int point2[2]) {
 	return sqrt(pow((point1[0] - point2[0]), 2) + pow((point1[1] - point2[1]), 2));
-}
-
-double calculateDiagonal(double line1, double line2) {
-	return sqrt(line1 * line1 + line2 * line2);
 }
 
 int calculatePerimeter(int line1, int line2, int line3, int line4) {
@@ -98,3 +44,35 @@ int calculateArea(int line1, int line2, int line3, int line4) {
 	return (line1 == line2) ? (line1 * line3) : (line1 * line2);
 }
 
+void sortPoints(int points[NUMBEROFPOINTS][2], int point1[2], int point2[2], int point4[2], int point3[2]) {
+	//sorta the array of points by lowest to highest x value, if x is the same the one with lowest y val comes first
+	for (int currentIndex= 0; currentIndex< NUMBEROFPOINTS - 1; currentIndex++) { //loop through each of the points
+		for (int nextIndex = currentIndex+ 1; nextIndex < NUMBEROFPOINTS; nextIndex++) { //loops through the points that are after the current index 
+			if (points[currentIndex][0] > points[nextIndex][0]) {//compare the x value of the points
+				swapPlaces(points, currentIndex, nextIndex); //swich the places of the points if the currentindex x val is greater
+			}
+			//if the x values are equal, compare the y values of the points 
+			else if (points[currentIndex][0] == points[nextIndex][0] && points[currentIndex][1] > points[nextIndex][1]) {
+				swapPlaces(points, currentIndex, nextIndex); //swich the places of the points if the currentindex y val is greater
+			}
+		}
+	}
+		point1[0] = points[0][0];
+		point1[1] = points[0][1];
+		point2[0] = points[1][0];
+		point2[1] = points[1][1];
+		point3[0] = points[3][0]; //point3= [3][] and point4 =[2][] need to be this way to ensure proper order of points
+		point3[1] = points[3][1];
+		point4[0] = points[2][0];
+		point4[1] = points[2][1];
+}
+
+void swapPlaces(int points[NUMBEROFPOINTS][2], int firstIndex, int secondIndex) {
+	int temporaryXValue = points[firstIndex][0]; // store the first points x and y value in temporary variable
+	int temporaryYValue = points[firstIndex][1];
+	//switch the place of the first point and second point
+	points[firstIndex][0] = points[secondIndex][0]; //move the second point to where the first one was
+	points[firstIndex][1] = points[secondIndex][1];
+	points[secondIndex][0] = temporaryXValue; //move the first point's x and y value (stored in temp) to the second point's old spot
+	points[secondIndex][1] = temporaryYValue;
+}

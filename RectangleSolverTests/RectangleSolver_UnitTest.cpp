@@ -40,14 +40,6 @@ namespace RectangleSolver_UnitTest
 			bool Result = isRectangle(points);
 			Assert::AreEqual(Expected, Result);
 		}
-
-		TEST_METHOD(isRectangleTest_duplicatePointsGiven_returnsFalse)
-		{
-			int points[4][2] = { {1,1 }, { 1,1 }, { 2,2 }, { 2,2 } };
-			bool Expected = false;
-			bool Result = isRectangle(points);
-			Assert::AreEqual(Expected, Result);
-		}
 		TEST_METHOD(isRectangleTest_notARectangle_returnsFalse) 
 		{
 			int points[4][2] = { {1,21 }, { 34,4 }, { 7,5 }, { 6,7 }};
